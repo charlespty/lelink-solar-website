@@ -124,7 +124,7 @@ Lelink Solar 是专业的太阳能发电机解决方案提供商，我们的网�
 ### 联系方式
 
 - **电话**: +86 138 0013 8000
-- **邮箱**: info@lelinksolar.com
+- **邮箱**: chris@lelinksolar.com
 - **技术支持**: support@lelinksolar.com
 - **销售咨询**: sales@lelinksolar.com
 

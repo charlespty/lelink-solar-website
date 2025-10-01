@@ -69,7 +69,7 @@ SMTP_PASS=your-app-password
 
 # 邮件地址
 FROM_EMAIL=noreply@lelinksolar.com
-CONTACT_EMAIL=info@lelinksolar.com
+CONTACT_EMAIL=chris@lelinksolar.com
 QUOTE_EMAIL=sales@lelinksolar.com
 ```
 
