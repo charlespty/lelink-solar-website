@@ -1,0 +1,95 @@
+{
+  "navigation": {
+    "home": "首页",
+    "products": "产品",
+    "solutions": "解决方案",
+    "calculator": "功率计算器",
+    "about": "关于我们",
+    "contact": "联系我们"
+  },
+  "products": {
+    "portableSolarGenerator": "便携式太阳能发电机",
+    "homeBackupSystem": "家庭备用系统",
+    "solarPanelAccessories": "太阳能板及配件"
+  },
+  "buttons": {
+    "getQuote": "获取报价",
+    "learnMore": "了解更多",
+    "buyNow": "立即购买",
+    "requestQuote": "询价",
+    "downloadManual": "下载手册",
+    "contactUs": "联系我们",
+    "subscribe": "订阅",
+    "send": "发送",
+    "calculate": "计算",
+    "reset": "重置"
+  },
+  "hero": {
+    "title": "用太阳能点亮您的未来",
+    "subtitle": "为家庭、企业和户外探险提供专业的太阳能发电机解决方案。清洁、可靠、可持续的电力，随时随地为您提供动力。",
+    "cta": "探索产品",
+    "secondaryCta": "功率计算器"
+  },
+  "features": {
+    "reliable": "可靠电力",
+    "portable": "便携设计",
+    "ecoFriendly": "环保友好",
+    "easyToUse": "易于使用",
+    "longLasting": "持久耐用",
+    "smartControl": "智能控制"
+  },
+  "solutions": {
+    "homeEnergy": "家庭能源解决方案",
+    "outdoorCamping": "户外露营",
+    "emergencyBackup": "应急备用",
+    "commercialIndustrial": "商业工业"
+  },
+  "calculator": {
+    "title": "功率计算器",
+    "subtitle": "计算您的电力需求，找到完美的太阳能解决方案",
+    "addAppliance": "添加电器",
+    "totalPower": "总功率需求",
+    "recommendedProducts": "推荐产品",
+    "applianceName": "电器名称",
+    "powerConsumption": "功耗 (瓦)",
+    "usageHours": "每日使用小时",
+    "quantity": "数量"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "准备用太阳能点亮您的未来吗？立即联系我们。",
+    "name": "姓名",
+    "email": "邮箱地址",
+    "phone": "电话号码",
+    "company": "公司",
+    "country": "国家",
+    "message": "留言",
+    "sendMessage": "发送消息"
+  },
+  "footer": {
+    "description": "为家庭、企业和户外探险提供领先的太阳能解决方案。为可持续的未来提供动力。",
+    "address": "中国江苏省无锡市",
+    "workingHours": "周一至周五：9:00-18:00 (GMT+8)",
+    "newsletterTitle": "保持更新",
+    "newsletterDescription": "获取有关太阳能解决方案的最新新闻和更新。",
+    "emailPlaceholder": "输入您的邮箱",
+    "privacyPolicy": "隐私政策",
+    "termsOfService": "服务条款",
+    "cookiePolicy": "Cookie政策"
+  },
+  "common": {
+    "loading": "加载中...",
+    "error": "出现错误",
+    "success": "成功",
+    "cancel": "取消",
+    "save": "保存",
+    "edit": "编辑",
+    "delete": "删除",
+    "search": "搜索",
+    "filter": "筛选",
+    "sort": "排序",
+    "viewAll": "查看全部",
+    "readMore": "阅读更多",
+    "backToTop": "返回顶部"
+  }
+}

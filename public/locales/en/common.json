@@ -1,0 +1,95 @@
+{
+  "navigation": {
+    "home": "Home",
+    "products": "Products",
+    "solutions": "Solutions",
+    "calculator": "Power Calculator",
+    "about": "About Us",
+    "contact": "Contact"
+  },
+  "products": {
+    "portableSolarGenerator": "Portable Solar Generator",
+    "homeBackupSystem": "Home Backup System",
+    "solarPanelAccessories": "Solar Panel & Accessories"
+  },
+  "buttons": {
+    "getQuote": "Get Quote",
+    "learnMore": "Learn More",
+    "buyNow": "Buy Now",
+    "requestQuote": "Request Quote",
+    "downloadManual": "Download Manual",
+    "contactUs": "Contact Us",
+    "subscribe": "Subscribe",
+    "send": "Send",
+    "calculate": "Calculate",
+    "reset": "Reset"
+  },
+  "hero": {
+    "title": "Power Your Future with Solar Energy",
+    "subtitle": "Professional solar generator solutions for homes, businesses, and outdoor adventures. Clean, reliable, and sustainable power wherever you need it.",
+    "cta": "Explore Products",
+    "secondaryCta": "Power Calculator"
+  },
+  "features": {
+    "reliable": "Reliable Power",
+    "portable": "Portable Design",
+    "ecoFriendly": "Eco-Friendly",
+    "easyToUse": "Easy to Use",
+    "longLasting": "Long Lasting",
+    "smartControl": "Smart Control"
+  },
+  "solutions": {
+    "homeEnergy": "Home Energy Solutions",
+    "outdoorCamping": "Outdoor Camping",
+    "emergencyBackup": "Emergency Backup",
+    "commercialIndustrial": "Commercial & Industrial"
+  },
+  "calculator": {
+    "title": "Power Calculator",
+    "subtitle": "Calculate your power needs and find the perfect solar solution",
+    "addAppliance": "Add Appliance",
+    "totalPower": "Total Power Required",
+    "recommendedProducts": "Recommended Products",
+    "applianceName": "Appliance Name",
+    "powerConsumption": "Power Consumption (W)",
+    "usageHours": "Usage Hours per Day",
+    "quantity": "Quantity"
+  },
+  "contact": {
+    "title": "Get in Touch",
+    "subtitle": "Ready to power your future with solar energy? Contact us today.",
+    "name": "Full Name",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "company": "Company",
+    "country": "Country",
+    "message": "Message",
+    "sendMessage": "Send Message"
+  },
+  "footer": {
+    "description": "Leading provider of solar energy solutions for homes, businesses, and outdoor adventures. Powering a sustainable future.",
+    "address": "Wuxi, Jiangsu, China",
+    "workingHours": "Mon-Fri: 9:00-18:00 (GMT+8)",
+    "newsletterTitle": "Stay Updated",
+    "newsletterDescription": "Get the latest news and updates about solar energy solutions.",
+    "emailPlaceholder": "Enter your email",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service",
+    "cookiePolicy": "Cookie Policy"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "viewAll": "View All",
+    "readMore": "Read More",
+    "backToTop": "Back to Top"
+  }
+}
