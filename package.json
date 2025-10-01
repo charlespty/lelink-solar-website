@@ -1,0 +1,18 @@
+{
+  "name": "lelink-solar-website",
+  "version": "1.0.0",
+  "description": "Lelink Solar - Professional solar generator solutions",
+  "private": true,
+  "scripts": {
+    "dev": "cd Website && npm run dev",
+    "build": "cd Website && npm run build",
+    "start": "cd Website && npm run start",
+    "install": "cd Website && npm install"
+  },
+  "workspaces": [
+    "Website"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
