@@ -4,15 +4,12 @@
   "description": "Lelink Solar - Professional solar generator solutions",
   "private": true,
   "scripts": {
-    "dev": "cd Website && npm run dev",
-    "build": "cd Website && npm run build",
-    "start": "cd Website && npm run start",
-    "install": "cd Website && npm install"
+    "build": "cd Website && npm ci --only=production && npm run build",
+    "start": "cd Website && npm start",
+    "install": "cd Website && npm ci --only=production"
   },
-  "workspaces": [
-    "Website"
-  ],
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
   }
 }

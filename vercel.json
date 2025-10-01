@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "Website/package.json",
+      "use": "@vercel/next",
+      "config": {
+        "distDir": ".next"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "Website/$1"
+    }
+  ],
+  "installCommand": "cd Website && npm ci --only=production",
+  "buildCommand": "cd Website && npm run build",
+  "outputDirectory": "Website/.next"
+}
