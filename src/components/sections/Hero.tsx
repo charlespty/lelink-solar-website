@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
 import { getImagePath } from '@/lib/imageUtils'
+import { LazyImage } from '@/components/optimization/LazyImage'
 import { 
   Zap, 
   Sun, 
@@ -54,6 +55,9 @@ export default function Hero() {
   const getLocalizedText = (en: string, zh: string) => {
     return isZh ? zh : en
   }
+
+  // 移动端优化：减少动画复杂度
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
 
   return (
     <section className="relative bg-gradient-to-br from-primary-900 via-primary-800 to-dark-900 text-white overflow-hidden">
@@ -175,13 +179,13 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 className="relative z-10"
               >
-                <Image
+                <LazyImage
                   src={getImagePath("/images/Product image/Front Side.png")}
                   alt="Lelink Solar Generator"
                   width={600}
                   height={600}
                   className="w-full h-auto"
-                  priority
+                  priority={true}
                 />
               </motion.div>
 

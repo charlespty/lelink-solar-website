@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
+import '../styles/mobile-optimization.css'
 import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
 import { WebsiteStructuredData } from '@/components/seo/StructuredData'
 import OnlineChat from '@/components/chat/OnlineChat'
 import MonitoringProvider from '@/components/monitoring/MonitoringProvider'
+import { PerformanceMonitor } from '@/components/optimization/PerformanceMonitor'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -94,7 +96,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#1e3a8a" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
       </head>
       <body className={`${inter.className} antialiased`}>
         <MonitoringProvider>
@@ -103,6 +105,7 @@ export default function RootLayout({
         <GoogleAnalytics />
         <WebsiteStructuredData />
         <OnlineChat />
+        <PerformanceMonitor />
       </body>
     </html>
   )

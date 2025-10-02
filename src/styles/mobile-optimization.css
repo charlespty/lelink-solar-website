@@ -1,0 +1,94 @@
+/* 移动端性能优化样式 */
+
+/* 减少重绘和重排 */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 移动端触摸优化 */
+@media (max-width: 768px) {
+  /* 减少动画复杂度 */
+  .motion-reduce {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  /* 优化图片加载 */
+  img {
+    will-change: auto;
+  }
+  
+  /* 减少阴影效果 */
+  .shadow-lg {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+  
+  /* 优化渐变背景 */
+  .bg-gradient-to-br {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #1f2937 100%);
+  }
+  
+  /* 减少模糊效果 */
+  .backdrop-blur-sm {
+    backdrop-filter: blur(2px);
+  }
+  
+  /* 优化字体渲染 */
+  body {
+    text-rendering: optimizeSpeed;
+  }
+}
+
+/* 预加载关键资源 */
+.preload-critical {
+  font-display: swap;
+}
+
+/* 优化滚动性能 */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* 减少布局抖动 */
+.aspect-ratio {
+  aspect-ratio: 16/9;
+}
+
+/* 移动端按钮优化 */
+@media (max-width: 768px) {
+  button, .btn {
+    min-height: 44px; /* iOS 推荐的最小触摸目标 */
+    min-width: 44px;
+  }
+}
+
+/* 图片懒加载占位符 */
+.lazy-placeholder {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 减少不必要的动画 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
