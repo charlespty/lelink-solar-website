@@ -6,6 +6,7 @@ import Image from 'next/image'
 // import { useTranslation } from 'next-i18next'
 import { motion } from 'framer-motion'
 import { Button } from '@/components/ui/Button'
+import { getImagePath } from '@/lib/imageUtils'
 import { 
   Zap, 
   Sun, 
@@ -175,7 +176,7 @@ export default function Hero() {
                 className="relative z-10"
               >
                 <Image
-                  src="/images/Product image/Front Side.png"
+                  src={getImagePath("/images/Product image/Front Side.png")}
                   alt="Lelink Solar Generator"
                   width={600}
                   height={600}
