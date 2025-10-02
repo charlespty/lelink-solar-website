@@ -3,9 +3,9 @@ const nextConfig = {
   // GitHub Pages 静态导出配置
   output: 'export',
   trailingSlash: true,
-  // 根据环境变量决定是否使用 basePath
-  basePath: process.env.NODE_ENV === 'production' && process.env.USE_CUSTOM_DOMAIN !== 'true' ? '/lelink-solar-website' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' && process.env.USE_CUSTOM_DOMAIN !== 'true' ? '/lelink-solar-website/' : '',
+  // 不使用 basePath，因为使用自定义域名
+  basePath: '',
+  assetPrefix: '',
   
   // 跳过类型检查
   typescript: {
