@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next'
 export const dynamic = 'force-static'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://charlespty.github.io/lelink-solar-website'
+  const baseUrl = process.env.USE_CUSTOM_DOMAIN === 'true' ? 'https://lelinksolar.com' : 'https://charlespty.github.io/lelink-solar-website'
   
   return [
     {

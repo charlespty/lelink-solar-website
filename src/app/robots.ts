@@ -9,6 +9,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/', '/_next/'],
     },
-    sitemap: 'https://charlespty.github.io/lelink-solar-website/sitemap.xml',
+    sitemap: process.env.USE_CUSTOM_DOMAIN === 'true' ? 'https://lelinksolar.com/sitemap.xml' : 'https://charlespty.github.io/lelink-solar-website/sitemap.xml',
   }
 }
