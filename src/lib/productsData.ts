@@ -1,4 +1,5 @@
 import { Zap, Sun, Battery, Shield, Car, Home, Tent, Wrench, Settings, Star, Package, Plug, Power, Usb, Award, ClipboardCheck, BarChart } from 'lucide-react'
+import { getImagePath } from './imageUtils'
 
 export const productsData = [
   {
@@ -8,12 +9,12 @@ export const productsData = [
     description: 'High-capacity portable power station with 2000W pure sine wave output, supporting multiple charging methods including solar, AC, and vehicle charging. Perfect for home backup, outdoor adventures, and emergency situations.',
     descriptionZh: '大容量便携式电源站，2000W纯正弦波输出，支持太阳能、交流电和车载充电等多种充电方式。完美适用于家庭备用、户外探险和紧急情况。',
     images: [
-      '/images/Product image/Front Side.png',
-      '/images/Product image/Side.png',
-      '/images/Product image/Back.png',
-      '/images/Product image/Side2.png',
-      '/images/Product image/Plug Side.png',
-      '/images/Product image/Led.png'
+      getImagePath('/images/Product image/Front Side.png'),
+      getImagePath('/images/Product image/Side.png'),
+      getImagePath('/images/Product image/Back.png'),
+      getImagePath('/images/Product image/Side2.png'),
+      getImagePath('/images/Product image/Plug Side.png'),
+      getImagePath('/images/Product image/Led.png')
     ],
     keyFeatures: [
       { icon: Zap, text: '2000W Pure Sine Wave Output', textZh: '2000W纯正弦波输出', description: 'Clean, stable power for sensitive electronics with 2×220V AC outlets', descriptionZh: '为敏感电子设备提供清洁、稳定的电力，配备2个220V交流输出口' },
@@ -127,12 +128,12 @@ export const productsData = [
     description: 'High-efficiency, portable, and versatile foldable solar panel for clean energy on the go. Lightweight, high conversion rate, multiple outputs, and customizable.',
     descriptionZh: '便携式折叠太阳能板，高效清洁能源。轻便携带 · 高转换率 · 多种输出 · 定制可选。',
     images: [
-      '/images/Product image/LP-400W/LP-400W-foldable.jpg',
-      '/images/Product image/LP-400W/LP-400W-outdoor-new.png',
-      '/images/Product image/LP-400W/LP-400W-camping.jpg',
-      '/images/Product image/LP-400W/LP-400W-seaside.jpg',
-      '/images/Product image/LP-400W/LP-400W-grassland.jpg',
-      '/images/Product image/LP-400W/LP-400W-extend.jpg',
+      getImagePath('/images/Product image/LP-400W/LP-400W-foldable.jpg'),
+      getImagePath('/images/Product image/LP-400W/LP-400W-outdoor-new.png'),
+      getImagePath('/images/Product image/LP-400W/LP-400W-camping.jpg'),
+      getImagePath('/images/Product image/LP-400W/LP-400W-seaside.jpg'),
+      getImagePath('/images/Product image/LP-400W/LP-400W-grassland.jpg'),
+      getImagePath('/images/Product image/LP-400W/LP-400W-extend.jpg'),
     ],
     keyFeatures: [
       { icon: Sun, text: 'High-Efficiency PV Conversion', textZh: '高效光电转换', description: 'Premium monocrystalline / PERC cells for stable performance', descriptionZh: '优质单晶 / PERC 电池片，性能稳定' },

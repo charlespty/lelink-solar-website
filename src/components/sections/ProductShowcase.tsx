@@ -22,6 +22,7 @@ import {
 } from 'lucide-react'
 
 import { getAllProducts } from '@/lib/productsData'
+import { getImagePath } from '@/lib/imageUtils'
 
 const products = getAllProducts()
 const coreProduct = products[0] // LK Solar Generator
@@ -38,7 +39,7 @@ const applicationScenarios = [
       { text: 'Essential appliances', textZh: '重要电器' },
       { text: 'Emergency lighting', textZh: '应急照明' }
     ],
-    image: '/images/Scenarios/home-scenario.png',
+    image: getImagePath('/images/Scenarios/home-scenario.png'),
     benefits: [
       { text: '24/7 Backup', textZh: '24/7 备用' },
       { text: 'Silent Operation', textZh: '静音运行' }
@@ -55,7 +56,7 @@ const applicationScenarios = [
       { text: 'Camping power', textZh: '露营用电' },
       { text: 'RV and van life', textZh: '房车生活' }
     ],
-    image: '/images/Scenarios/outdoor-scenario.png',
+    image: getImagePath('/images/Scenarios/outdoor-scenario.png'),
     benefits: [
       { text: 'Ultra-Portable', textZh: '超便携' },
       { text: 'Weather Resistant', textZh: '防风雨' }

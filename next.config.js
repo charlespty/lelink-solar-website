@@ -3,8 +3,8 @@ const nextConfig = {
   // GitHub Pages 静态导出配置
   output: 'export',
   trailingSlash: true,
-  basePath: process.env.NODE_ENV === 'production' ? '/lelink-solar-website' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/lelink-solar-website/' : '',
+  basePath: '/lelink-solar-website',
+  assetPrefix: '/lelink-solar-website/',
   
   // 跳过类型检查
   typescript: {

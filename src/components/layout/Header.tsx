@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { Menu, X, ChevronDown, Globe } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
+import { getImagePath } from '@/lib/imageUtils'
 
 const navigation = [
   {
@@ -123,7 +124,7 @@ export default function Header() {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-4">
               <Image
-                src="/images/logo.png"
+                src={getImagePath("/images/logo.png")}
                 alt="Lelink Solar"
                 width={120}
                 height={120}

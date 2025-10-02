@@ -3,6 +3,7 @@
 import React from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { getImagePath } from '@/lib/imageUtils'
 // import { useTranslation } from 'next-i18next'
 import { 
   MapPin, 
@@ -52,7 +53,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-4 mb-4">
               <Image
-                src="/images/logo.png"
+                src={getImagePath("/images/logo.png")}
                 alt="Lelink Solar"
                 width={70}
                 height={70}
