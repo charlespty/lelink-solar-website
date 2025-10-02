@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // GitHub Pages 静态导出配置
+  output: 'export',
+  trailingSlash: true,
+  basePath: process.env.NODE_ENV === 'production' ? '/lelink-solar-website' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/lelink-solar-website/' : '',
+  
   // 跳过类型检查
   typescript: {
     ignoreBuildErrors: true,
@@ -9,7 +15,6 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   // 优化配置
-  swcMinify: true,
   compress: true,
   // 实验性功能
   experimental: {

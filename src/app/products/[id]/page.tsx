@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { ProductImageCarousel } from '@/components/ProductImageCarousel'
+import { getAllProducts } from '@/lib/productsData'
 import { 
   Home, 
   Tent, 
@@ -29,6 +30,14 @@ import {
   Settings
 } from 'lucide-react'
 import { getProductById } from '@/lib/productsData'
+
+// Generate static params for all products
+export async function generateStaticParams() {
+  const products = getAllProducts()
+  return products.map((product) => ({
+    id: product.id,
+  }))
+}
 
 // Helper function for localization (simplified for server component)
 const getLocalizedText = (enText: string, zhText: string, currentLanguage: string = 'en') => {
