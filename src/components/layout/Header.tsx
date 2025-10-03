@@ -45,6 +45,15 @@ const navigation = [
         nameAr: 'لوحة شمسية قابلة للطي LP',
         href: '/products/lp-400w-solar-panel',
       },
+      {
+        name: 'LT Fixed Solar Panel',
+        nameEn: 'LT Fixed Solar Panel',
+        nameZh: 'LT 固定式太阳能面板',
+        nameFr: 'Panneau Solaire Fixe LT',
+        nameEs: 'Panel Solar Fijo LT',
+        nameAr: 'لوحة شمسية ثابتة LT',
+        href: '/products/lt-fixed-solar-panel',
+      },
     ],
   },
   {

@@ -205,7 +205,7 @@ export default function CalculatorPage() {
         link: `/products/${product.id}`
       }))
     } else {
-      // 推荐多个LK Solar Generator或LP Solar Panel组合
+      // 推荐多个LK Solar Generator或太阳能面板组合
       return [
         {
           id: 'lk-solar-generator-lk-2000',
@@ -217,11 +217,20 @@ export default function CalculatorPage() {
           link: '/products/lk-solar-generator-lk-2000'
         },
         {
+          id: 'lt-fixed-solar-panel',
+          name: 'LT Fixed Solar Panel',
+          capacity: '550W Solar Input',
+          suitability: 'Complementary',
+          description: 'Add fixed solar panels for renewable charging',
+          image: products.find(p => p.id === 'lt-fixed-solar-panel')?.images[0] || '',
+          link: '/products/lt-fixed-solar-panel'
+        },
+        {
           id: 'lp-400w-solar-panel',
           name: 'LP Foldable Solar Panel',
           capacity: '400W Solar Input',
-          suitability: 'Complementary',
-          description: 'Add solar panels for renewable charging',
+          suitability: 'Portable Option',
+          description: 'Portable solar panels for flexible charging',
           image: products.find(p => p.id === 'lp-400w-solar-panel')?.images[0] || '',
           link: '/products/lp-400w-solar-panel'
         }

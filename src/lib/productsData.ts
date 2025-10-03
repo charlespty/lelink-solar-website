@@ -255,6 +255,137 @@ export const productsData = [
       testing: 'Laboratory testing capabilities + strict quality inspection process',
       testingZh: '实验室测试能力 + 严格质检流程'
     }
+  },
+  {
+    id: 'lt-fixed-solar-panel',
+    name: 'LT Fixed Solar Panel',
+    nameZh: 'LT 固定式太阳能面板',
+    description: 'High-efficiency fixed solar panel designed for permanent installation. Features robust aluminum frame, half-cut cell technology, and excellent performance in various weather conditions.',
+    descriptionZh: '高效固定式太阳能面板，专为永久安装设计。采用坚固的铝合金框架、半片电池技术，在各种天气条件下表现优异。',
+    images: [
+      getImagePath('/images/Product image/LT-Fixed/LT-fixed-panel-1.jpg'),
+      getImagePath('/images/Product image/LT-Fixed/LT-fixed-panel-2.jpg'),
+      getImagePath('/images/Product image/LT-Fixed/LT-fixed-panel-3.jpg'),
+    ],
+    keyFeatures: [
+      { icon: Sun, text: 'Half-Cut Cell Technology', textZh: '半片电池技术', description: 'Improved efficiency and better performance in partial shading conditions', descriptionZh: '提高效率，在部分遮挡条件下表现更佳' },
+      { icon: Shield, text: 'Robust Aluminum Frame', textZh: '坚固铝合金框架', description: 'Weather-resistant frame with excellent structural integrity', descriptionZh: '耐候性框架，结构完整性优异' },
+      { icon: Zap, text: 'High Conversion Efficiency', textZh: '高转换效率', description: 'Advanced cell technology for maximum power output', descriptionZh: '先进电池技术，实现最大功率输出' },
+      { icon: Settings, text: 'Easy Installation', textZh: '易于安装', description: 'Standard mounting holes and clear installation guidelines', descriptionZh: '标准安装孔和清晰的安装指南' }
+    ],
+    specifications: [
+      { name: 'Model', value: 'LT-550W', unit: '', nameZh: '型号' },
+      { name: 'Cell Type', value: 'Monocrystalline', unit: 'Half-Cut', nameZh: '电池类型' },
+      { name: 'Max Power', value: '550W', unit: '', nameZh: '最大功率' },
+      { name: 'Open Circuit Voltage', value: '49.8V', unit: '', nameZh: '开路电压' },
+      { name: 'Short Circuit Current', value: '13.8A', unit: '', nameZh: '短路电流' },
+      { name: 'Working Voltage', value: '41.2V', unit: '', nameZh: '工作电压' },
+      { name: 'Working Current', value: '13.35A', unit: '', nameZh: '工作电流' },
+      { name: 'Conversion Efficiency', value: '>21%', unit: '', nameZh: '转换效率' },
+      { name: 'Frame Material', value: 'Anodized Aluminum', unit: '', nameZh: '框架材料' },
+      { name: 'Dimensions', value: '2279×1134×35', unit: 'mm', nameZh: '尺寸' },
+      { name: 'Weight', value: '28.5', unit: 'kg', nameZh: '重量' },
+      { name: 'Operating Temp', value: '-40°C to +85°C', unit: '', nameZh: '工作温度' },
+      { name: 'Max Wind Load', value: '2400Pa', unit: '', nameZh: '最大风载' },
+      { name: 'Max Snow Load', value: '5400Pa', unit: '', nameZh: '最大雪载' }
+    ],
+    applicationScenarios: [
+      {
+        name: 'Residential Rooftop',
+        nameZh: '住宅屋顶',
+        description: 'Perfect for home rooftop installations, providing clean energy for household consumption.',
+        descriptionZh: '完美适用于家庭屋顶安装，为家庭用电提供清洁能源。',
+        useCases: [
+          { text: 'Home energy independence', textZh: '家庭能源独立' },
+          { text: 'Reduce electricity bills', textZh: '降低电费支出' },
+          { text: 'Grid-tie systems', textZh: '并网系统' },
+          { text: 'Net metering', textZh: '净计量' }
+        ],
+        powerExamples: [
+          { appliance: 'Household Appliances', power: '3000W', duration: '6h/day', applianceZh: '家用电器' },
+          { appliance: 'Air Conditioning', power: '2000W', duration: '8h/day', applianceZh: '空调' },
+          { appliance: 'Water Heater', power: '1500W', duration: '4h/day', applianceZh: '热水器' },
+          { appliance: 'Lighting', power: '500W', duration: '12h/day', applianceZh: '照明' }
+        ]
+      },
+      {
+        name: 'Commercial Buildings',
+        nameZh: '商业建筑',
+        description: 'Ideal for office buildings, warehouses, and commercial facilities.',
+        descriptionZh: '适用于办公楼、仓库和商业设施的完美选择。',
+        useCases: [
+          { text: 'Office building power', textZh: '办公楼供电' },
+          { text: 'Warehouse operations', textZh: '仓库运营' },
+          { text: 'Shopping centers', textZh: '购物中心' },
+          { text: 'Industrial facilities', textZh: '工业设施' }
+        ],
+        powerExamples: [
+          { appliance: 'Office Equipment', power: '5000W', duration: '8h/day', applianceZh: '办公设备' },
+          { appliance: 'HVAC Systems', power: '8000W', duration: '10h/day', applianceZh: '暖通空调系统' },
+          { appliance: 'Lighting Systems', power: '2000W', duration: '12h/day', applianceZh: '照明系统' },
+          { appliance: 'Security Systems', power: '500W', duration: '24h/day', applianceZh: '安防系统' }
+        ]
+      },
+      {
+        name: 'Agricultural Applications',
+        nameZh: '农业应用',
+        description: 'Support farming operations with reliable solar power for irrigation and equipment.',
+        descriptionZh: '为农业运营提供可靠的太阳能，支持灌溉和设备运行。',
+        useCases: [
+          { text: 'Irrigation systems', textZh: '灌溉系统' },
+          { text: 'Greenhouse operations', textZh: '温室运营' },
+          { text: 'Farm equipment', textZh: '农业设备' },
+          { text: 'Livestock facilities', textZh: '畜牧设施' }
+        ],
+        powerExamples: [
+          { appliance: 'Water Pumps', power: '2000W', duration: '6h/day', applianceZh: '水泵' },
+          { appliance: 'Greenhouse Fans', power: '1000W', duration: '8h/day', applianceZh: '温室风扇' },
+          { appliance: 'Feed Processing', power: '3000W', duration: '4h/day', applianceZh: '饲料加工' },
+          { appliance: 'Monitoring Systems', power: '200W', duration: '24h/day', applianceZh: '监控系统' }
+        ]
+      },
+      {
+        name: 'Industrial Installations',
+        nameZh: '工业安装',
+        description: 'Heavy-duty applications for manufacturing and industrial facilities.',
+        descriptionZh: '适用于制造和工业设施的重型应用。',
+        useCases: [
+          { text: 'Manufacturing plants', textZh: '制造工厂' },
+          { text: 'Mining operations', textZh: '采矿作业' },
+          { text: 'Oil & gas facilities', textZh: '石油天然气设施' },
+          { text: 'Data centers', textZh: '数据中心' }
+        ],
+        powerExamples: [
+          { appliance: 'Production Equipment', power: '10000W', duration: '12h/day', applianceZh: '生产设备' },
+          { appliance: 'Compressed Air', power: '5000W', duration: '8h/day', applianceZh: '压缩空气' },
+          { appliance: 'Cooling Systems', power: '8000W', duration: '16h/day', applianceZh: '冷却系统' },
+          { appliance: 'Control Systems', power: '1000W', duration: '24h/day', applianceZh: '控制系统' }
+        ]
+      }
+    ],
+    customizationService: {
+      title: 'Customization Service',
+      titleZh: '定制服务',
+      description: 'We offer OEM/ODM solutions with flexible customization options for power ratings, dimensions, and mounting systems.',
+      descriptionZh: '我们提供OEM/ODM解决方案，在功率等级、尺寸和安装系统方面具有灵活的定制选项。',
+      workflow: [
+        { step: 'Requirement Analysis', stepZh: '需求分析' },
+        { step: 'Technical Design', stepZh: '技术设计' },
+        { step: 'Prototype Development', stepZh: '原型开发' },
+        { step: 'Testing & Validation', stepZh: '测试验证' },
+        { step: 'Mass Production', stepZh: '批量生产' }
+      ]
+    },
+    afterSalesAndCertifications: {
+      title: 'After-sales Support & Certifications',
+      titleZh: '售后保障与认证',
+      warranty: '25 Years Linear Power Warranty / 12 Years Product Warranty',
+      warrantyZh: '25年线性功率保修 / 12年产品保修',
+      certifications: 'IEC 61215, IEC 61730, CE, TUV, UL, FCC',
+      certificationsZh: '符合 IEC 61215, IEC 61730, CE, TUV, UL, FCC 标准',
+      testing: 'Comprehensive quality testing including PID, LID, and mechanical stress tests',
+      testingZh: '全面质量测试，包括PID、LID和机械应力测试'
+    }
   }
 ]
 

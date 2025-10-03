@@ -19,7 +19,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/products/le-solar-generator`,
+      url: `${baseUrl}/products/lk-solar-generator-lk-2000`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/products/lp-400w-solar-panel`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/products/lt-fixed-solar-panel`,
       lastModified: new Date(),
       changeFrequency: 'monthly',
       priority: 0.8,
