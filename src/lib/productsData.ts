@@ -266,6 +266,7 @@ export const productsData = [
       getImagePath('/images/Product image/LT-Fixed/LT-fixed-panel-1.jpg'),
       getImagePath('/images/Product image/LT-Fixed/LT-fixed-panel-2.jpg'),
       getImagePath('/images/Product image/LT-Fixed/LT-fixed-panel-3.jpg'),
+      getImagePath('/images/Product image/LT-Fixed/LT-fixed-panel-4.jpg'),
     ],
     keyFeatures: [
       { icon: Sun, text: 'Half-Cut Cell Technology', textZh: '半片电池技术', description: 'Improved efficiency and better performance in partial shading conditions', descriptionZh: '提高效率，在部分遮挡条件下表现更佳' },
