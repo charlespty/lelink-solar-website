@@ -9,12 +9,12 @@ export const productsData = [
     description: 'High-capacity portable power station with 2000W pure sine wave output, supporting multiple charging methods including solar, AC, and vehicle charging. Perfect for home backup, outdoor adventures, and emergency situations.',
     descriptionZh: '大容量便携式电源站，2000W纯正弦波输出，支持太阳能、交流电和车载充电等多种充电方式。完美适用于家庭备用、户外探险和紧急情况。',
     images: [
-      getImagePath('/images/Product image/Front Side.png'),
-      getImagePath('/images/Product image/Side.png'),
-      getImagePath('/images/Product image/Back.png'),
-      getImagePath('/images/Product image/Side2.png'),
-      getImagePath('/images/Product image/Plug Side.png'),
-      getImagePath('/images/Product image/Led.png')
+      getImagePath('/images/Product image/optimized/Front Side.jpg'),
+      getImagePath('/images/Product image/optimized/Side.jpg'),
+      getImagePath('/images/Product image/optimized/Back.jpg'),
+      getImagePath('/images/Product image/optimized/Side2.jpg'),
+      getImagePath('/images/Product image/optimized/Plug Side.jpg'),
+      getImagePath('/images/Product image/optimized/Led.jpg')
     ],
     keyFeatures: [
       { icon: Zap, text: '2000W Pure Sine Wave Output', textZh: '2000W纯正弦波输出', description: 'Clean, stable power for sensitive electronics with 2×220V AC outlets', descriptionZh: '为敏感电子设备提供清洁、稳定的电力，配备2个220V交流输出口' },
