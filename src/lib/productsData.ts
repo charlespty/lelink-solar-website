@@ -123,8 +123,8 @@ export const productsData = [
   },
   {
     id: 'lp-400w-solar-panel',
-    name: 'LP Solar Panel',
-    nameZh: 'LP 太阳能面板',
+    name: 'LP Foldable Solar Panel',
+    nameZh: 'LP 折叠太阳能面板',
     description: 'High-efficiency, portable, and versatile foldable solar panel for clean energy on the go. Lightweight, high conversion rate, multiple outputs, and customizable.',
     descriptionZh: '便携式折叠太阳能板，高效清洁能源。轻便携带 · 高转换率 · 多种输出 · 定制可选。',
     images: [

@@ -217,12 +217,12 @@ export default function CalculatorPage() {
           link: '/products/lk-solar-generator-lk-2000'
         },
         {
-          id: 'lp-solar-panel',
-          name: 'LP Solar Panel',
+          id: 'lp-400w-solar-panel',
+          name: 'LP Foldable Solar Panel',
           capacity: '400W Solar Input',
           suitability: 'Complementary',
           description: 'Add solar panels for renewable charging',
-          image: products.find(p => p.id === 'lp-solar-panel')?.images[0] || '',
+          image: products.find(p => p.id === 'lp-400w-solar-panel')?.images[0] || '',
           link: '/products/lp-400w-solar-panel'
         }
       ]
