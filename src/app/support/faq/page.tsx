@@ -27,6 +27,14 @@ const faqData = [
     answerZh: 'LE太阳能发电机提供3000W连续功率输出，峰值功率6000W。配备3000Wh磷酸铁锂电池，可为重要电器提供长时间供电。'
   },
   {
+    id: 11,
+    questionEn: 'How do I choose the right solar inverter for my system?',
+    questionZh: '如何为我的系统选择合适的太阳能逆变器？',
+    answerEn: 'Choosing the right solar inverter involves considering power rating (80-90% of panel capacity), efficiency ratings (97-98%), MPPT technology, weather resistance, and warranty coverage. Check our comprehensive Solar Inverter Selection Guide for detailed information.',
+    answerZh: '选择合适的太阳能逆变器需要考虑功率额定值（面板容量的80-90%）、效率等级（97-98%）、MPPT技术、耐候性和保修覆盖。查看我们的综合太阳能逆变器选择指南获取详细信息。',
+    hasGuide: true
+  },
+  {
     id: 2,
     questionEn: 'How long does it take to fully charge the solar generator?',
     questionZh: '太阳能发电机完全充电需要多长时间？',
@@ -229,6 +237,17 @@ export default function FAQPage() {
                           <p className="text-gray-300 leading-relaxed">
                             {getLocalizedText(faq.answerEn, faq.answerZh)}
                           </p>
+                          {faq.hasGuide && (
+                            <div className="mt-4">
+                              <Link 
+                                href="/support/solar-inverter-guide"
+                                className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                              >
+                                <FileText className="w-4 h-4 mr-2" />
+                                {getLocalizedText('View Detailed Guide', '查看详细指南', currentLanguage)}
+                              </Link>
+                            </div>
+                          )}
                         </CardContent>
                       )}
                     </Card>

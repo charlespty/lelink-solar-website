@@ -99,3 +99,4 @@ git push origin main
 3. 启用 HTTP/2 和 Brotli 压缩
 4. 实施图片懒加载
 5. 使用 WebP 格式
+
