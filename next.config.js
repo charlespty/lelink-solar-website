@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // GitHub Pages 静态导出配置
-  output: 'export',
-  trailingSlash: true,
+  // // output: 'export', // 后台需要API
+  // // trailingSlash: true,
   // 不使用 basePath，因为使用自定义域名
   basePath: '',
   assetPrefix: '',
@@ -33,10 +33,6 @@ const nextConfig = {
     minimumCacheTTL: 31536000, // 1年缓存
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
-  // 排除API路由
-  async rewrites() {
-    return []
   },
 }
 
