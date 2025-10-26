@@ -112,8 +112,8 @@ export default function ProductShowcase() {
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12">
             {getLocalizedText(
-              'One powerful solution, countless applications. Our LE Solar Generator Series adapts to your needs.',
-              '一个强大的解决方案，无数种应用。我们的LE太阳能发电机系列适应您的需求。'
+              'One powerful solution, countless applications. Our Solar energy storage battery system adapts to your needs.',
+              '一个强大的解决方案，无数种应用。我们的太阳能储能电池系统适应您的需求。'
             )}
           </p>
         </motion.div>
@@ -204,8 +204,8 @@ export default function ProductShowcase() {
           </h3>
           <p className="text-lg text-gray-300">
             {getLocalizedText(
-              'Discover how our solar generator powers your life in different situations.',
-              '了解我们的太阳能发电机如何在不同情况下为您的生活提供动力。'
+              'Discover how our solar energy storage battery system powers your life in different situations.',
+              '了解我们的太阳能储能电池系统如何在不同情况下为您的生活提供动力。'
             )}
           </p>
         </motion.div>
