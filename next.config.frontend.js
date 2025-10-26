@@ -34,6 +34,10 @@ const nextConfig = {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  // 排除API路由
+  async rewrites() {
+    return []
+  },
 }
 
 module.exports = nextConfig
