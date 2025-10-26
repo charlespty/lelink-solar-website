@@ -127,3 +127,80 @@ export function PerformanceMonitor() {
     </div>
   )
 }
+        largestContentfulPaint,
+        firstInputDelay: 0, // 需要用户交互才能测量
+        cumulativeLayoutShift: 0, // 需要用户交互才能测量
+      })
+
+      setIsVisible(true)
+    }
+
+    // 页面加载完成后测量性能
+    if (document.readyState === 'complete') {
+      measurePerformance()
+    } else {
+      window.addEventListener('load', measurePerformance)
+    }
+
+    return () => {
+      window.removeEventListener('load', measurePerformance)
+    }
+  }, [])
+
+  if (!isVisible || !metrics) return null
+
+  const getPerformanceColor = (value: number, thresholds: { good: number; poor: number }) => {
+    if (value <= thresholds.good) return 'text-green-600'
+    if (value <= thresholds.poor) return 'text-yellow-600'
+    return 'text-red-600'
+  }
+  return (
+    <div className="fixed bottom-4 right-4 bg-white border border-gray-300 rounded-lg shadow-lg p-4 max-w-sm z-50">
+      <div className="flex items-center justify-between mb-2">
+        <h3 className="text-sm font-semibold text-gray-800">性能监控</h3>
+        <button
+          onClick={() => setIsVisible(false)}
+          className="text-gray-400 hover:text-gray-600"
+        >
+          ×
+        </button>
+      </div>
+      
+      <div className="space-y-2 text-xs">
+        <div className="flex justify-between">
+          <span>页面加载时间:</span>
+          <span className={getPerformanceColor(metrics.loadTime, { good: 1000, poor: 3000 })}>
+            {metrics.loadTime.toFixed(0)}ms
+          </span>
+        </div>
+        
+        <div className="flex justify-between">
+          <span>DOM 加载时间:</span>
+          <span className={getPerformanceColor(metrics.domContentLoaded, { good: 1000, poor: 3000 })}>
+            {metrics.domContentLoaded.toFixed(0)}ms
+          </span>
+        </div>
+        
+        <div className="flex justify-between">
+          <span>首次内容绘制:</span>
+          <span className={getPerformanceColor(metrics.firstContentfulPaint, { good: 1500, poor: 3000 })}>
+            {metrics.firstContentfulPaint.toFixed(0)}ms
+          </span>
+        </div>
+        
+        <div className="flex justify-between">
+          <span>最大内容绘制:</span>
+          <span className={getPerformanceColor(metrics.largestContentfulPaint, { good: 2500, poor: 4000 })}>
+            {metrics.largestContentfulPaint.toFixed(0)}ms
+          </span>
+        </div>
+      </div>
+      
+      <div className="mt-3 pt-2 border-t border-gray-200">
+        <div className="text-xs text-gray-600">
+          💡 绿色: 优秀 | 黄色: 需要改进 | 红色: 较差
+        </div>
+      </div>
+    </div>
+  )
+}

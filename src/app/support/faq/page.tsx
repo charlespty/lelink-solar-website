@@ -343,3 +343,22 @@ export default function FAQPage() {
     </>
   )
 }
+                      <Link href="/contact">
+                        <Button className="bg-blue-600 hover:bg-blue-700 text-white">
+                          {getLocalizedText('Send Email', '发送邮件')}
+                        </Button>
+                      </Link>
+                    </CardContent>
+                  </Card>
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </main>
+
+        <Footer />
+      </div>
+    </>
+  )
+}
+

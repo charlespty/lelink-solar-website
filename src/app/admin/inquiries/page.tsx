@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Search, Filter, Mail, Phone, Calendar, Package, Eye, CheckCircle, XCircle } from 'lucide-react'
 
 interface Inquiry {
@@ -15,42 +15,38 @@ interface Inquiry {
 }
 
 export default function InquiriesPage() {
-  const [inquiries, setInquiries] = useState<Inquiry[]>([
-    {
-      id: 1,
-      customer: '张三',
-      email: 'zhangsan@example.com',
-      phone: '+86 138 1234 5678',
-      product: 'LK Solar Generator',
-      message: '我对这款产品很感兴趣，请问有什么优惠吗？',
-      date: '2024-10-26',
-      status: 'pending'
-    },
-    {
-      id: 2,
-      customer: 'John Smith',
-      email: 'john@example.com',
-      phone: '+1 234 567 8900',
-      product: 'LP Foldable Solar Panel',
-      message: 'I need 10 units. What is the wholesale price?',
-      date: '2024-10-25',
-      status: 'replied'
-    },
-    {
-      id: 3,
-      customer: '李四',
-      email: 'lisi@example.com',
-      phone: '+86 139 8765 4321',
-      product: 'LT Fixed Solar Panel',
-      message: '请问产品的质保期是多久？',
-      date: '2024-10-24',
-      status: 'pending'
-    },
-  ])
-
+  const [inquiries, setInquiries] = useState<Inquiry[]>([])
   const [searchTerm, setSearchTerm] = useState('')
   const [statusFilter, setStatusFilter] = useState<string>('all')
   const [selectedInquiry, setSelectedInquiry] = useState<Inquiry | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [stats, setStats] = useState({
+    pending: 0,
+    replied: 0,
+    total: 0
+  })
+
+  // 加载询价数据
+  useEffect(() => {
+    loadInquiries()
+  }, [statusFilter, searchTerm])
+
+  const loadInquiries = async () => {
+    try {
+      setIsLoading(true)
+      const response = await fetch(`/api/admin/inquiries?status=${statusFilter}&search=${searchTerm}`)
+      const result = await response.json()
+      
+      if (result.success) {
+        setInquiries(result.data)
+        setStats(result.stats)
+      }
+    } catch (error) {
+      console.error('Failed to load inquiries:', error)
+    } finally {
+      setIsLoading(false)
+    }
+  }
 
   const filteredInquiries = inquiries.filter(inquiry => {
     const matchesSearch = 
@@ -63,10 +59,27 @@ export default function InquiriesPage() {
     return matchesSearch && matchesStatus
   })
 
-  const handleStatusChange = (id: number, newStatus: 'pending' | 'replied' | 'closed') => {
-    setInquiries(inquiries.map(inq => 
-      inq.id === id ? {...inq, status: newStatus} : inq
-    ))
+  const handleStatusChange = async (id: number, newStatus: 'pending' | 'replied' | 'closed') => {
+    try {
+      const response = await fetch('/api/admin/inquiries', {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id, status: newStatus }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        // 重新加载数据
+        loadInquiries()
+      } else {
+        alert('更新失败：' + result.error)
+      }
+    } catch (error) {
+      alert('更新失败，请重试')
+    }
   }
 
   const getStatusBadge = (status: string) => {
@@ -97,7 +110,7 @@ export default function InquiriesPage() {
             <div>
               <p className="text-gray-400 text-sm mb-1">待处理</p>
               <p className="text-3xl font-bold text-yellow-400">
-                {inquiries.filter(i => i.status === 'pending').length}
+                {stats.pending}
               </p>
             </div>
             <div className="bg-yellow-500/20 p-3 rounded-lg">
@@ -111,7 +124,7 @@ export default function InquiriesPage() {
             <div>
               <p className="text-gray-400 text-sm mb-1">已回复</p>
               <p className="text-3xl font-bold text-green-400">
-                {inquiries.filter(i => i.status === 'replied').length}
+                {stats.replied}
               </p>
             </div>
             <div className="bg-green-500/20 p-3 rounded-lg">
@@ -124,7 +137,7 @@ export default function InquiriesPage() {
           <div className="flex items-center justify-between">
             <div>
               <p className="text-gray-400 text-sm mb-1">总计</p>
-              <p className="text-3xl font-bold text-white">{inquiries.length}</p>
+              <p className="text-3xl font-bold text-white">{stats.total}</p>
             </div>
             <div className="bg-blue-500/20 p-3 rounded-lg">
               <Package className="w-6 h-6 text-blue-400" />

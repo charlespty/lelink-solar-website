@@ -538,3 +538,12 @@ export default function CalculatorPage() {
     </>
   )
 }
+          </div>
+        </main>
+
+        <Footer />
+      </div>
+    </>
+  )
+}
+

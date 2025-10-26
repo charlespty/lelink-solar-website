@@ -18,20 +18,27 @@ export default function AdminLoginPage() {
     setIsLoading(true)
 
     try {
-      // 临时使用本地验证，实际应该调用API
-      // 默认账号: admin, 密码: admin123
-      if (username === 'admin' && password === 'admin123') {
-        // 生成临时token
-        const token = btoa(`${username}:${Date.now()}`)
-        localStorage.setItem('admin_token', token)
-        localStorage.setItem('admin_user', JSON.stringify({ username, role: 'admin' }))
+      const response = await fetch('/api/admin/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      })
+
+      const result = await response.json()
+
+      if (result.success) {
+        // 保存token和用户信息
+        localStorage.setItem('admin_token', result.data.token)
+        localStorage.setItem('admin_user', JSON.stringify(result.data.user))
         
         router.push('/admin/dashboard')
       } else {
-        setError('用户名或密码错误')
+        setError(result.error || '登录失败')
       }
     } catch (err) {
-      setError('登录失败，请重试')
+      setError('登录失败，请检查网络连接')
     } finally {
       setIsLoading(false)
     }
