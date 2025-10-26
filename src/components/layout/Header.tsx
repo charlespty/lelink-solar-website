@@ -238,12 +238,4 @@ export default function Header() {
     </header>
   )
 }
-              ))}
-            </div>
-          </div>
-        )}
-      </nav>
-    </header>
-  )
-}
 

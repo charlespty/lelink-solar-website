@@ -1,137 +1,270 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
-import { Upload, X, Image as ImageIcon } from 'lucide-react'
+import React, { useState, useRef, useCallback } from 'react'
+import { Upload, X, Image as ImageIcon, Loader2, Check, AlertCircle } from 'lucide-react'
+import { Button } from '@/components/ui/Button'
+import { Card, CardContent } from '@/components/ui/Card'
 
 interface ImageUploadProps {
-  onUpload: (url: string) => void
-  currentImage?: string
-  label?: string
+  onImageUpload: (file: File) => Promise<string>
+  onImageRemove?: (imageUrl: string) => void
+  existingImages?: string[]
+  maxImages?: number
+  accept?: string
+  className?: string
 }
 
-export function ImageUpload({ onUpload, currentImage, label = '上传图片' }: ImageUploadProps) {
-  const [isUploading, setIsUploading] = useState(false)
-  const [preview, setPreview] = useState<string | null>(currentImage || null)
-  const [error, setError] = useState<string | null>(null)
+interface UploadedImage {
+  id: string
+  url: string
+  name: string
+  size: number
+  status: 'uploading' | 'success' | 'error'
+  error?: string
+}
+
+export default function ImageUpload({
+  onImageUpload,
+  onImageRemove,
+  existingImages = [],
+  maxImages = 10,
+  accept = 'image/*',
+  className = ''
+}: ImageUploadProps) {
+  const [images, setImages] = useState<UploadedImage[]>(
+    existingImages.map((url, index) => ({
+      id: `existing-${index}`,
+      url,
+      name: `Image ${index + 1}`,
+      size: 0,
+      status: 'success'
+    }))
+  )
+  const [isDragOver, setIsDragOver] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (!file) return
-
-    // 验证文件类型
-    if (!file.type.startsWith('image/')) {
-      setError('请选择图片文件')
+  const handleFileSelect = useCallback(async (files: FileList) => {
+    const fileArray = Array.from(files)
+    const remainingSlots = maxImages - images.length
+    
+    if (fileArray.length > remainingSlots) {
+      alert(`最多只能上传 ${maxImages} 张图片，当前已有 ${images.length} 张`)
       return
     }
 
-    // 验证文件大小 (5MB)
-    if (file.size > 5 * 1024 * 1024) {
-      setError('文件大小不能超过5MB')
-      return
-    }
-
-    setError(null)
-    setIsUploading(true)
-
-    try {
-      // 创建预览
-      const reader = new FileReader()
-      reader.onloadend = () => {
-        setPreview(reader.result as string)
+    for (const file of fileArray) {
+      if (!file.type.startsWith('image/')) {
+        alert(`文件 ${file.name} 不是有效的图片格式`)
+        continue
       }
-      reader.readAsDataURL(file)
 
-      // 上传文件
-      const formData = new FormData()
-      formData.append('file', file)
-
-      const response = await fetch('/api/admin/upload', {
-        method: 'POST',
-        body: formData,
-      })
-
-      const result = await response.json()
-
-      if (result.success) {
-        onUpload(result.data.url)
-      } else {
-        setError(result.error || '上传失败')
-        setPreview(null)
+      const imageId = `upload-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`
+      const newImage: UploadedImage = {
+        id: imageId,
+        url: '',
+        name: file.name,
+        size: file.size,
+        status: 'uploading'
       }
-    } catch (err) {
-      setError('上传失败，请重试')
-      setPreview(null)
-    } finally {
-      setIsUploading(false)
+
+      setImages(prev => [...prev, newImage])
+
+      try {
+        const uploadedUrl = await onImageUpload(file)
+        setImages(prev => 
+          prev.map(img => 
+            img.id === imageId 
+              ? { ...img, url: uploadedUrl, status: 'success' }
+              : img
+          )
+        )
+      } catch (error) {
+        setImages(prev => 
+          prev.map(img => 
+            img.id === imageId 
+              ? { 
+                  ...img, 
+                  status: 'error', 
+                  error: error instanceof Error ? error.message : '上传失败'
+                }
+              : img
+          )
+        )
+      }
     }
+  }, [images.length, maxImages, onImageUpload])
+
+  const handleDrop = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+    
+    const files = e.dataTransfer.files
+    if (files.length > 0) {
+      handleFileSelect(files)
+    }
+  }, [handleFileSelect])
+
+  const handleDragOver = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(true)
+  }, [])
+
+  const handleDragLeave = useCallback((e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+  }, [])
+
+  const handleFileInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
+    if (files && files.length > 0) {
+      handleFileSelect(files)
+    }
+  }, [handleFileSelect])
+
+  const handleRemoveImage = useCallback((imageId: string, imageUrl: string) => {
+    setImages(prev => prev.filter(img => img.id !== imageId))
+    if (onImageRemove && imageUrl) {
+      onImageRemove(imageUrl)
+    }
+  }, [onImageRemove])
+
+  const formatFileSize = (bytes: number) => {
+    if (bytes === 0) return '0 Bytes'
+    const k = 1024
+    const sizes = ['Bytes', 'KB', 'MB', 'GB']
+    const i = Math.floor(Math.log(bytes) / Math.log(k))
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
   }
 
-  const handleRemove = () => {
-    setPreview(null)
-    setError(null)
-    if (fileInputRef.current) {
-      fileInputRef.current.value = ''
+  const getStatusIcon = (status: UploadedImage['status']) => {
+    switch (status) {
+      case 'uploading':
+        return <Loader2 className="h-4 w-4 animate-spin text-blue-500" />
+      case 'success':
+        return <Check className="h-4 w-4 text-green-500" />
+      case 'error':
+        return <AlertCircle className="h-4 w-4 text-red-500" />
+      default:
+        return null
     }
-    onUpload('')
   }
 
   return (
-    <div className="space-y-3">
-      <label className="block text-gray-300 text-sm font-medium">{label}</label>
-
-      {preview ? (
-        <div className="relative">
-          <img
-            src={preview}
-            alt="Preview"
-            className="w-full h-48 object-cover rounded-lg border border-gray-600"
-          />
-          <button
-            type="button"
-            onClick={handleRemove}
-            className="absolute top-2 right-2 bg-red-600 hover:bg-red-700 text-white p-2 rounded-full transition-colors"
-          >
-            <X className="w-4 h-4" />
-          </button>
-        </div>
-      ) : (
-        <div
-          onClick={() => fileInputRef.current?.click()}
-          className="border-2 border-dashed border-gray-600 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors"
-        >
-          {isUploading ? (
-            <div className="flex flex-col items-center space-y-3">
-              <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-500"></div>
-              <p className="text-gray-400">上传中...</p>
+    <div className={`space-y-4 ${className}`}>
+      {/* 上传区域 */}
+      <Card 
+        className={`border-2 border-dashed transition-colors ${
+          isDragOver 
+            ? 'border-blue-500 bg-blue-50' 
+            : 'border-gray-300 hover:border-gray-400'
+        }`}
+        onDrop={handleDrop}
+        onDragOver={handleDragOver}
+        onDragLeave={handleDragLeave}
+      >
+        <CardContent className="p-6 text-center">
+          <div className="space-y-4">
+            <div className="mx-auto w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
+              <Upload className="h-6 w-6 text-gray-600" />
             </div>
-          ) : (
-            <div className="flex flex-col items-center space-y-3">
-              <div className="bg-gray-700 p-4 rounded-full">
-                <ImageIcon className="w-8 h-8 text-gray-400" />
-              </div>
-              <div>
-                <p className="text-white font-medium mb-1">点击上传图片</p>
-                <p className="text-gray-400 text-sm">支持 JPG, PNG, WebP, GIF</p>
-                <p className="text-gray-400 text-sm">最大 5MB</p>
-              </div>
+            
+            <div>
+              <h3 className="text-lg font-medium text-gray-900">
+                上传图片
+              </h3>
+              <p className="text-sm text-gray-500 mt-1">
+                拖拽图片到此处，或点击选择文件
+              </p>
+              <p className="text-xs text-gray-400 mt-1">
+                支持 JPG、PNG、GIF、WebP 格式，最大 10MB
+              </p>
             </div>
-          )}
+
+            <Button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="bg-blue-600 hover:bg-blue-700 text-white"
+              disabled={images.length >= maxImages}
+            >
+              <ImageIcon className="h-4 w-4 mr-2" />
+              选择图片
+            </Button>
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={accept}
+              multiple
+              onChange={handleFileInputChange}
+              className="hidden"
+            />
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* 图片列表 */}
+      {images.length > 0 && (
+        <div className="space-y-2">
+          <h4 className="text-sm font-medium text-gray-700">
+            已上传图片 ({images.length}/{maxImages})
+          </h4>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+            {images.map((image) => (
+              <Card key={image.id} className="relative group">
+                <CardContent className="p-2">
+                  <div className="relative">
+                    {image.status === 'success' && image.url ? (
+                      <img
+                        src={image.url}
+                        alt={image.name}
+                        className="w-full h-24 object-cover rounded-md"
+                      />
+                    ) : (
+                      <div className="w-full h-24 bg-gray-100 rounded-md flex items-center justify-center">
+                        <ImageIcon className="h-8 w-8 text-gray-400" />
+                      </div>
+                    )}
+
+                    {/* 状态指示器 */}
+                    <div className="absolute top-2 right-2">
+                      {getStatusIcon(image.status)}
+                    </div>
+
+                    {/* 删除按钮 */}
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      className="absolute top-2 left-2 opacity-0 group-hover:opacity-100 transition-opacity bg-red-500 hover:bg-red-600 text-white p-1 h-6 w-6"
+                      onClick={() => handleRemoveImage(image.id, image.url)}
+                    >
+                      <X className="h-3 w-3" />
+                    </Button>
+                  </div>
+
+                  {/* 图片信息 */}
+                  <div className="mt-2 space-y-1">
+                    <p className="text-xs text-gray-600 truncate" title={image.name}>
+                      {image.name}
+                    </p>
+                    {image.size > 0 && (
+                      <p className="text-xs text-gray-400">
+                        {formatFileSize(image.size)}
+                      </p>
+                    )}
+                    {image.status === 'error' && image.error && (
+                      <p className="text-xs text-red-500" title={image.error}>
+                        上传失败
+                      </p>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
-      )}
-
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="image/*"
-        onChange={handleFileChange}
-        className="hidden"
-      />
-
-      {error && (
-        <p className="text-red-400 text-sm">{error}</p>
       )}
     </div>
   )
 }
-

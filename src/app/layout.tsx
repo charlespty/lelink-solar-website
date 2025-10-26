@@ -2,11 +2,11 @@ import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import '../styles/mobile-optimization.css'
-import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
-import { WebsiteStructuredData } from '@/components/seo/StructuredData'
-import OnlineChat from '@/components/chat/OnlineChat'
-import MonitoringProvider from '@/components/monitoring/MonitoringProvider'
-import { PerformanceMonitor } from '@/components/optimization/PerformanceMonitor'
+// import GoogleAnalytics from '@/components/analytics/GoogleAnalytics'
+// import { WebsiteStructuredData } from '@/components/seo/StructuredData'
+// import OnlineChat from '@/components/chat/OnlineChat'
+// import MonitoringProvider from '@/components/monitoring/MonitoringProvider'
+// import PerformanceMonitor from '@/components/optimization/PerformanceMonitor'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -99,13 +99,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
       </head>
       <body className={`${inter.className} antialiased`}>
-        <MonitoringProvider>
-          {children}
-        </MonitoringProvider>
-        <GoogleAnalytics />
-        <WebsiteStructuredData />
-        <OnlineChat />
-        <PerformanceMonitor />
+        {children}
       </body>
     </html>
   )

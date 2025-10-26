@@ -1,85 +1,126 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { writeFile } from 'fs/promises'
-import path from 'path'
+import { NextRequest, NextResponse } from 'next/server';
+import { writeFile, mkdir } from 'fs/promises';
+import { join } from 'path';
+import { existsSync } from 'fs';
 
 export async function POST(request: NextRequest) {
   try {
-    const formData = await request.formData()
-    const file = formData.get('file') as File
-
+    const formData = await request.formData();
+    const file = formData.get('file') as File;
+    
     if (!file) {
       return NextResponse.json({
         success: false,
         error: 'No file provided'
-      }, { status: 400 })
+      }, { status: 400 });
     }
 
     // 验证文件类型
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/svg+xml'];
     if (!allowedTypes.includes(file.type)) {
       return NextResponse.json({
         success: false,
-        error: 'Invalid file type. Only JPEG, PNG, WebP and GIF are allowed.'
-      }, { status: 400 })
+        error: 'Invalid file type. Only images are allowed.'
+      }, { status: 400 });
     }
 
-    // 验证文件大小 (5MB限制)
-    const maxSize = 5 * 1024 * 1024 // 5MB
+    // 验证文件大小 (10MB limit)
+    const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
       return NextResponse.json({
         success: false,
-        error: 'File size exceeds 5MB limit'
-      }, { status: 400 })
+        error: 'File too large. Maximum size is 10MB.'
+      }, { status: 400 });
     }
 
     // 生成唯一文件名
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-    const timestamp = Date.now()
-    const ext = file.name.split('.').pop()
-    const filename = `${timestamp}-${Math.random().toString(36).substring(7)}.${ext}`
-
-    // 保存到public/uploads目录
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads')
-    const filepath = path.join(uploadDir, filename)
-
-    // 确保uploads目录存在
-    try {
-      await writeFile(filepath, buffer)
-    } catch (error) {
-      // 如果目录不存在，可能需要创建
-      return NextResponse.json({
-        success: false,
-        error: 'Failed to save file. Please ensure uploads directory exists.'
-      }, { status: 500 })
+    const timestamp = Date.now();
+    const randomString = Math.random().toString(36).substring(2, 15);
+    const fileExtension = file.name.split('.').pop();
+    const fileName = `${timestamp}-${randomString}.${fileExtension}`;
+    
+    // 创建上传目录
+    const uploadDir = join(process.cwd(), 'public', 'uploads', 'content');
+    if (!existsSync(uploadDir)) {
+      await mkdir(uploadDir, { recursive: true });
     }
 
-    // 返回文件URL
-    const fileUrl = `/uploads/${filename}`
+    // 保存文件
+    const filePath = join(uploadDir, fileName);
+    const bytes = await file.arrayBuffer();
+    const buffer = Buffer.from(bytes);
+    await writeFile(filePath, buffer);
 
+    // 返回文件URL
+    const fileUrl = `/uploads/content/${fileName}`;
+    
     return NextResponse.json({
       success: true,
       data: {
-        filename,
         url: fileUrl,
+        fileName: fileName,
+        originalName: file.name,
         size: file.size,
         type: file.type
       },
       message: 'File uploaded successfully'
-    })
+    });
+
   } catch (error) {
-    console.error('Upload error:', error)
+    console.error('Upload error:', error);
     return NextResponse.json({
       success: false,
       error: 'Failed to upload file'
-    }, { status: 500 })
+    }, { status: 500 });
   }
 }
 
-// 配置
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-}
+// 处理图片删除
+export async function DELETE(request: NextRequest) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const fileUrl = searchParams.get('url');
+    
+    if (!fileUrl) {
+      return NextResponse.json({
+        success: false,
+        error: 'File URL is required'
+      }, { status: 400 });
+    }
 
+    // 从URL中提取文件路径
+    const fileName = fileUrl.split('/').pop();
+    if (!fileName) {
+      return NextResponse.json({
+        success: false,
+        error: 'Invalid file URL'
+      }, { status: 400 });
+    }
+
+    const filePath = join(process.cwd(), 'public', 'uploads', 'content', fileName);
+    
+    // 检查文件是否存在
+    if (!existsSync(filePath)) {
+      return NextResponse.json({
+        success: false,
+        error: 'File not found'
+      }, { status: 404 });
+    }
+
+    // 删除文件
+    const { unlink } = await import('fs/promises');
+    await unlink(filePath);
+    
+    return NextResponse.json({
+      success: true,
+      message: 'File deleted successfully'
+    });
+
+  } catch (error) {
+    console.error('Delete error:', error);
+    return NextResponse.json({
+      success: false,
+      error: 'Failed to delete file'
+    }, { status: 500 });
+  }
+}
