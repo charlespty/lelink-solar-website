@@ -95,8 +95,8 @@ export default function Hero() {
                 className="text-xl text-gray-200 leading-relaxed max-w-2xl"
               >
                 {getLocalizedText(
-                  'Professional solar generator solutions for homes, businesses, and outdoor adventures. Clean, reliable, and sustainable power wherever you need it.',
-                  '为家庭、企业和户外探险提供专业的太阳能发电机解决方案。清洁、可靠、可持续的电力，随时随地为您提供动力。'
+                  'Professional solar energy storage battery system solutions for Residential, C&I and Outdoor Travel.',
+                  '为住宅、工商业和户外旅行提供专业的太阳能储能电池系统解决方案。'
                 )}
               </motion.p>
             </div>
